@@ -1,0 +1,13 @@
+{
+    "name": "shurtliff/swapi",
+    "authors": [
+        {
+            "name": "Casey Shurtliff",
+            "email": "shurtliff@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "rmasters/swapi": "dev-master"
+    }
+}
