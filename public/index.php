@@ -29,7 +29,6 @@ function filterByPrice($vehicle, $price, $type){
 			}
 		} else {  // Assume equal if no other option is given
 			if($diff === 0){
-				echo 'equal';
 				return true;
 			}
 		}
