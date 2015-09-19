@@ -32,17 +32,21 @@ function loadAllStuff($call){
 
   return $things;
   }
-$vehicles = loadAllStuff($swapi->vehicles());
 
 // Header
 echo "<h1><a href='/index.php'>Starwars</a></h1>";
 
 // Body
-echo $_GET["test"];
+if (isset($_GET["starshipDetails"])) {
+	echo displayStarship($swapi->getFromUri($_GET["starshipDetails"]),$swapi);
+} else  {
+	$vehicles = loadAllStuff($swapi->vehicles());
+	for($i =0; $i<count($vehicles);$i++){
+		echo $vehicles[$i]->url;
+		echo displayMinimalStarship($vehicles[$i]) . '</br>';
+	}	
 
-for($i =0; $i<count($vehicles);$i++){
+}
 
-echo displayStarship($vehicles[$i]) . '</br>';
-}	
 
 // Footer
