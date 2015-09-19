@@ -16,6 +16,28 @@ function compare_cost_asc($a,$b){
 function compare_cost_desc($a,$b){
 	return $a->cost_in_credits < $b->cost_in_credits; 
 }
+function filterByPrice($vehicle, $price, $type){
+	if($price != ""){
+		$diff = $vehicle->cost_in_credits - $price;
+		if ($type == "greater"){
+			if($diff > 0) {
+				return true;
+			}
+		} else if ($type == "less"){
+			if($diff < 0) {
+				return true;
+			}
+		} else {  // Assume equal if no other option is given
+			if($diff === 0){
+				echo 'equal';
+				return true;
+			}
+		}
+
+	}
+	// Return true by default
+	return false;
+}
 function loadAllStuff($call){
 	$i = 0;
 	$things = [];
@@ -63,10 +85,21 @@ if (isset($_GET["starshipDetails"])) {
 
 	}
 
+	$priceFilter = "";
+	$priceFilterType = "";
+	if(isset($_GET["filterByPrice"])){
+		$priceFilter = $_GET["filterByPrice"];
+	}
+	if(isset($_GET["filterByPriceType"])){
+		$priceFilterType = $_GET["filterByPriceType"];
+	}
+
 	for($i =0; $i<count($vehicles);$i++){
 		if($shipName == "" || stripos($vehicles[$i]->name,$shipName)){
-//			echo $vehicles[$i]->url;
-			echo displayMinimalStarship($vehicles[$i]) . '</br>';
+			if(filterByPrice($vehicles[$i],$priceFilter,$priceFilterType)){
+	//			echo $vehicles[$i]->url;
+				echo displayMinimalStarship($vehicles[$i]) . '</br>';
+			}
 		}
 	}	
 
