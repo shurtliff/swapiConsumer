@@ -36,7 +36,7 @@ function filterByPrice($vehicle, $price, $type){
 
 	}
 	// Return true by default
-	return false;
+	return true;
 }
 function loadAllStuff($call){
 	$i = 0;
@@ -55,7 +55,7 @@ function loadAllStuff($call){
 	       // echo sprintf("%s - %s\n", $v->name, $v->url);
 	    }
 	    // for now just deal with the first page to speed up development
-	} while (false && $temp->hasNext());
+	} while ($temp->hasNext());
 
 
   return $things;
