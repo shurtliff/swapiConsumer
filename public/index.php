@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('America/Denver');
 require_once __DIR__ . '/../vendor/autoload.php';
+include_once 'starship.php';
 use SWAPI\SWAPI;
 
 $swapi = new SWAPI;
@@ -25,17 +26,23 @@ function loadAllStuff($call){
 	    	$i++;
 	       // echo sprintf("%s - %s\n", $v->name, $v->url);
 	    }
-	} while ($temp->hasNext());
+	    // for now just deal with the first page to speed up development
+	} while (false && $temp->hasNext());
 
 
   return $things;
   }
 $vehicles = loadAllStuff($swapi->vehicles());
 
+// Header
+echo "<h1><a href='/index.php'>Starwars</a></h1>";
 
-echo "<h1>Starwars</h1>";
-
+// Body
+echo $_GET["test"];
 
 for($i =0; $i<count($vehicles);$i++){
-echo $vehicles[$i]->name . ' ' .  $vehicles[$i]->cost_in_credits . '</br>';
+
+echo displayStarship($vehicles[$i]) . '</br>';
 }	
+
+// Footer
